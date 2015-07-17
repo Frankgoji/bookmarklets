@@ -16,5 +16,5 @@ url=$1
 links=$(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
 arr_links=(${links//;/ })
 for l in "${arr_links[@]}"; do
-    wget $l &
+    wget $l
 done
