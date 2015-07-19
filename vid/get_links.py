@@ -16,7 +16,6 @@ driver.get("http://downvids.net/download-youtube-playlist-videos")
 bar = driver.find_element_by_name("playlist")
 bar.send_keys(pl_url)
 bar.send_keys(Keys.RETURN)
-# close popup
 driver.switch_to_window("windowname5")
 driver.close()
 driver.switch_to_window(driver.window_handles[0])
