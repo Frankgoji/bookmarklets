@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import argv
 
-# read argument to get playlist url
 if len(argv) != 2:
     raise ValueError("Needs only 1 arg: playlist url")
 
