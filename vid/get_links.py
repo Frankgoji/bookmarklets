@@ -11,6 +11,7 @@ if len(argv) != 2:
 pl_url = argv[1]
 
 driver = webdriver.Firefox()
+driver.implicitly_wait(20)
 driver.get("http://downvids.net/download-youtube-playlist-videos")
 bar = driver.find_element_by_name("playlist")
 bar.send_keys(pl_url)
