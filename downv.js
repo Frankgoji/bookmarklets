@@ -1,3 +1,4 @@
+// Essentially obsolete because of the Selenium script
 javascript:(function(){
     _myscript=document.createElement('SCRIPT');
     _myscript.type='text/javascript';

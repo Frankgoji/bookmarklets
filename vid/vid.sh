@@ -15,6 +15,9 @@ url=$1
 
 links=$(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
 arr_links=(${links//;/ })
+i=0
 for l in "${arr_links[@]}"; do
-    wget $l
+    printf -v j "%02d" $i
+    let "i += 1"
+    wget --output-document=$j $l
 done
