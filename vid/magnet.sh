@@ -21,3 +21,5 @@ while read line; do
     echo "d10:magnet-uri${#line}:${line}e" > "meta-${BASH_REMATCH[1]}.torrent"
 done <$file
 mv *.torrent ~/Downloads/.rt_watch
+
+rtorrent
