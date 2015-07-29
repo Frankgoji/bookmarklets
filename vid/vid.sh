@@ -21,7 +21,7 @@ links=$(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url
 arr_links=(${links//;/ })
 i=0
 for l in "${arr_links[@]}"; do
-    printf -v j "${name}_%02d" $i
+    printf -v j "${name}_%02d.mp4" $i
     let "i += 1"
     wget --output-document=$j $l
 done
