@@ -2,6 +2,8 @@
 # This script will take a youtube playlist link and download all the videos in
 # the playlist.
 
+# recommendation: use screen and detach
+
 function error {
     echo $1
     exit 1
