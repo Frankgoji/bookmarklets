@@ -9,6 +9,6 @@ if len(argv) != 4:
 
 USER, PASS, VID = argv[1:]
 
-#driver = webdriver.Firefox()
-#driver.implicitly_wait(20)
-#driver.get("https://www.facebook.com")
+driver = webdriver.Firefox()
+driver.implicitly_wait(20)
+driver.get("https://www.facebook.com")
