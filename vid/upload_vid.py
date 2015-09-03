@@ -1,5 +1,7 @@
 # Uploads the given video to Facebook
 
+# This is going on deep hold
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import argv
