@@ -14,3 +14,5 @@ function clickButton() {
 }
 
 clickButton();
+
+// include a line that has the browser click the shuffle button on the playlist
