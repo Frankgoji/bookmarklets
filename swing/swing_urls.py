@@ -29,7 +29,8 @@ class LinkHTMLParser(HTMLParser):
 
     def handle_data(self, data):
         if LinkHTMLParser.should_print and 'jpg' not in data:
-            print(LinkHTMLParser.url_to_print + data)
+            string = LinkHTMLParser.url_to_print + data
+            print(string)
             LinkHTMLParser.url_to_print = ''
 
 parser = LinkHTMLParser(convert_charrefs=True)
