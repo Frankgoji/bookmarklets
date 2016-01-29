@@ -16,6 +16,6 @@ for url in "${!URLS[@]}"; do
     mkdir "$url"
     cd "$url"
     python3 ~/Documents/personal_projects/bookmarklets/swing/swing_urls.py "${URLS["$url"]}" | sort -u \
-        | sed 's/|/ -O \"/' | sed 's/$/\"/' | sed 's/^/wget /' | while read line; do eval $line; done
+        | sed 's/|/ -nc -O \"/' | sed 's/$/\"/' | sed 's/^/wget /' | while read line; do eval $line; done
     cd ..
 done
