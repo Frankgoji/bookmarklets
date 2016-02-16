@@ -13,7 +13,7 @@ function clickButton() {
     _link = _links[Math.floor(Math.random() * _links.length)];
     window.location.href = _link.href;
     _shuffle = document.getElementsByClassName("yt-uix-button yt-uix-button-size-default yt-uix-button-player-controls yt-uix-button-empty yt-uix-button-has-icon shuffle-playlist yt-uix-button-opacity yt-uix-tooltip yt-uix-tooltip");
-    _shuffle[0].click();
+    setTimeOut(function(){_shuffle[0].click();}, 2000);
 }
 
 function clickLoad() {
