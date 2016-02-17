@@ -26,7 +26,3 @@ function clickLoad() {
 }
 
 clickButton();
-
-// Also make sure to click the "Load" button at the bottom of the screen to make
-// sure the whole playlist has been loaded
-// include a line that has the browser click the shuffle button on the playlist
