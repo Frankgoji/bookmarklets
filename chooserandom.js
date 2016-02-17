@@ -13,7 +13,7 @@ function clickButton() {
     _link = _links[Math.floor(Math.random() * _links.length)];
     window.location.href = _link.href;
     _shuffle = document.getElementsByClassName("yt-uix-button yt-uix-button-size-default yt-uix-button-player-controls yt-uix-button-empty yt-uix-button-has-icon shuffle-playlist yt-uix-button-opacity yt-uix-tooltip yt-uix-tooltip");
-    setTimeOut(function(){_shuffle[0].click();}, 2000);
+    setTimeout(function(){_shuffle[0].click();}, 2000);
 }
 
 function clickLoad() {
@@ -21,7 +21,7 @@ function clickLoad() {
     _load_button = document.getElementsByClassName(_load_more)
     if (_load_button.length != 0) {
         _load_button[0].click();
-        setTimeOut(clickLoad, 1000);
+        setTimeout(clickLoad, 1000);
     }
 }
 
