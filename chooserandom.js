@@ -8,21 +8,18 @@ javascript:(function(){
 
 // This is the script listed in the google drive file
 function clickButton() {
-    clickLoad();
     _links = document.getElementsByClassName("pl-video-title-link yt-uix-tile-link yt-uix-sessionlink  spf-link ");
     _link = _links[Math.floor(Math.random() * _links.length)];
     window.location.href = _link.href;
-    _shuffle = document.getElementsByClassName("yt-uix-button yt-uix-button-size-default yt-uix-button-player-controls yt-uix-button-empty yt-uix-button-has-icon shuffle-playlist yt-uix-button-opacity yt-uix-tooltip yt-uix-tooltip");
-    setTimeout(function(){_shuffle[0].click();}, 2000);
 }
 
-function clickLoad() {
+var load_button_interval = setInterval(function(){
     _load_more = "yt-uix-button yt-uix-button-size-default yt-uix-button-default load-more-button yt-uix-load-more browse-items-load-more-button";
     _load_button = document.getElementsByClassName(_load_more);
     if (_load_button.length !== 0) {
         _load_button[0].click();
-        setTimeout(clickLoad, 1000);
+    } else {
+        clearInterval(load_button_interval);
+        clickButton();
     }
-}
-
-clickButton();
+}, 1000);
