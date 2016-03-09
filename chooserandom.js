@@ -10,7 +10,7 @@ javascript:(function(){
 function clickButton() {
     _links = document.getElementsByClassName("pl-video-title-link yt-uix-tile-link yt-uix-sessionlink  spf-link ");
     _link = _links[Math.floor(Math.random() * _links.length)];
-    window.location.href = _link.href;
+    window.location.href = _link.href + "&shuffle=1";
 }
 
 var load_button_interval = setInterval(function(){
