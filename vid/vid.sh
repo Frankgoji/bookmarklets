@@ -32,6 +32,6 @@ for l in "${arr_links[@]}"; do
             rm $j
         fi
         wget --output-document=$j $l
-        try=$((try+1))
+        let "try += 1"
     done
 done
