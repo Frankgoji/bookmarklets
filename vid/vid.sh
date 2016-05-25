@@ -13,8 +13,11 @@ fi
 
 url=$1
 name=$2
+tries=10
 
-mkdir $name
+if [[ ! -d $name ]]; then
+    mkdir $name
+fi
 cd $name
 
 links=$(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
@@ -23,5 +26,12 @@ i=0
 for l in "${arr_links[@]}"; do
     printf -v j "${name}_%02d.mp4" $i
     let "i += 1"
-    wget --output-document=$j $l
+    try=0
+    while [[ (! -e $j || ! -s $j) && $try -lt $tries ]]; do
+        if [[ -e $j ]]; then
+            rm $j
+        fi
+        wget --output-document=$j $l
+        try=$((try+1))
+    done
 done
