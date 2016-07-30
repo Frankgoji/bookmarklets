@@ -1,6 +1,8 @@
 # This python script uses selenium to get the appropriate links for the
 # specified youtube playlist, then prints them out.
 
+# TODO: when marionnette for selenium is officially released, upgrade to that
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import argv
