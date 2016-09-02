@@ -1,8 +1,8 @@
 # Downloads a large playlist by individually getting the video urls, using a
 # downloader, and running a parallel operation to download it
 
-# Differs from vid.sh in that it doesn't use a playlist downloader, which hangs
-# on large playlists. Leaves a log in the folder with timestamps for each
+# Differs from vid.sh in that it threads the downloads, leaves the original
+# names of the videos, and leaves a log in the folder with timestamps for each
 # operation
 
 # TODO: one selenium webdriver, 5 threads getting links -> 5 webdrivers
@@ -24,7 +24,8 @@ class ParaPLDL:
         """Initializes the downloader with a Selenium webdriver"""
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(20)
-        self.driver.get(url)
+        self.driver.get(url) # TODO: don't get url, get the pl download site and
+        # input the url. can get the titles from checking the elements
         # TODO: click all the links until all of the playlist elements are
         # present
         #bar = driver.find_element_by_name("playlist")
