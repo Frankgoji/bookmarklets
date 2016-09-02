@@ -12,7 +12,7 @@ function usage {
     echo "      dv -h                   Brings up this help screen"
     echo "      dv -q                   Downloads the queue from Youtube (default)"
     echo "      dv -p [url] [name]      Downloads the playlist with name"
-    echo "      dv -lp [url] [name]     Downloads a large playlist with name"
+    echo "      dv -lp [url]            Downloads a large playlist with name"
     echo "      dv -u [user] [pass] [video_file]      Uploads the video file to Facebook"
     echo "      dv -m [magnet_file]     Saves the magnet urls into torrent files and launches rtorrent"
 }
