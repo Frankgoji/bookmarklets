@@ -33,7 +33,7 @@ elif [[ $# == 3 && $1 == "-p" ]]; then
     ~/Documents/personal_projects/bookmarklets/vid/vid.sh $2 $3
 elif [[ $# == 3 && $1 == "-lp" ]]; then
     cd ~/Desktop
-    ~/Documents/personal_projects/bookmarklets/vid/parallel_pl.py $2 $3
+    python3 ~/Documents/personal_projects/bookmarklets/vid/parallel_pl.py $2 $3
 elif [[ $# == 4 && $1 == "-u" ]]; then
     python3 ~/Documents/personal_projects/bookmarklets/vid/upload_vid.py $2 $3 $4
 elif [[ $# == 2 && $1 == "-m" ]]; then

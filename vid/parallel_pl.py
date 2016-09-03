@@ -5,14 +5,6 @@
 # names of the videos, and leaves a log in the folder with timestamps for each
 # operation
 
-# TODO: one selenium webdriver, 5 threads getting links -> 5 webdrivers
-# downloading the links
-# TODO: queue with info such as vid_num and name ("%0d %s" % vid_num, name), and
-# download link
-# TODO: a separate thread running simultaneously that waits for all vids done
-# downloading and nothing in queue, runs wget to download each vid from the
-# queue
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import argv
