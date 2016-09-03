@@ -31,9 +31,13 @@ elif [[ $# == 0 || ($# == 1 && $1 == "-q") ]]; then
 elif [[ $# == 3 && $1 == "-p" ]]; then
     cd ~/Desktop
     ~/Documents/personal_projects/bookmarklets/vid/vid.sh $2 $3
-elif [[ $# == 3 && $1 == "-lp" ]]; then
+elif [[ $1 == "-lp" ]]; then
     cd ~/Desktop
-    python3 ~/Documents/personal_projects/bookmarklets/vid/parallel_pl.py $2 $3
+    args="$2 $3"
+    if [[ $# == 4 ]]; then
+        args="$args $4"
+    fi
+    python3 ~/Documents/personal_projects/bookmarklets/vid/parallel_pl.py $args
 elif [[ $# == 4 && $1 == "-u" ]]; then
     python3 ~/Documents/personal_projects/bookmarklets/vid/upload_vid.py $2 $3 $4
 elif [[ $# == 2 && $1 == "-m" ]]; then

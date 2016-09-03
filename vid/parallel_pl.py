@@ -42,7 +42,6 @@ class ParaPLDL:
         self.download_urls = list(map(lambda x: x.get_attribute("href"), links))
         self.titles = list(map(lambda x: x.text,
                     self.driver.find_elements_by_css_selector('.msgtxt.en')))
-        assert self.download_urls == self.titles, "Diff num of titles and links"
         self.log("Acquired video download links and titles")
         self.driver.quit()
         self.log("Closed the Selenium webdriver")
@@ -58,19 +57,20 @@ class ParaPLDL:
         """Runs the download process with multiple threads"""
         trycount = 10
         numprefix = '{0:0%dd}' % len(str(thread_count))
+        vidprefix = '{0:0%dd}' % len(str(len(self.titles)))
 
         def downloader(thread_num):
             """A thread that runs the download"""
             tid = 'Thread ' + numprefix.format(thread_num) + ': '
             for i in range(thread_num, len(self.titles), thread_count):
                 title, link = self.titles[i], self.download_urls[i]
-                name = numprefix.format(thread_num) + ' ' + title + '.mp4'
+                name = vidprefix.format(i) + ' ' + title + '.mp4'
                 tries = 0
                 while (not os.path.exists(name) or os.path.getsize(name) == 0) \
                         and tries <= trycount:
                     if os.path.exists(name): os.remove(name)
-                    subprocess.call(['wget', '--output-document=' + name, link])
                     self.log(tid + 'Calling wget for ' + name)
+                    subprocess.call(['wget', '--output-document=' + name, link])
                     tries += 1
                 if (not os.path.exists(name) or os.path.getsize(name) == 0):
                     self.log(tid + 'wget failed for ' + name)
@@ -92,16 +92,18 @@ class ParaPLDL:
 
 
 if __name__ == '__main__':
-    if len(argv) != 3:
+    if len(argv) <= 3:
         raise ValueError("Needs playlist url and name")
 
     url = argv[1]
     name = argv[2]
+    thread_num = argv[3] if len(argv) == 4 else 2
 
     # Create folder
-    os.mkdir(name)
+    if not os.path.exists(name):
+        os.mkdir(name)
     os.chdir(name)
 
     pldl = ParaPLDL(url, name)
-    pldl.run()
+    pldl.run(int(thread_num))
 
