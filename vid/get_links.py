@@ -1,8 +1,6 @@
 # This python script uses selenium to get the appropriate links for the
 # specified youtube playlist, then prints them out.
 
-# TODO: when marionnette for selenium is officially released, upgrade to that
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import argv
@@ -18,10 +16,13 @@ driver.get("http://downvids.net/download-youtube-playlist-videos")
 bar = driver.find_element_by_name("playlist")
 bar.send_keys(pl_url)
 bar.send_keys(Keys.RETURN)
-driver.switch_to_window("windowname5")
+driver.switch_to_window(driver.window_handles[1])
 driver.close()
 driver.switch_to_window(driver.window_handles[0])
 links = driver.find_elements_by_link_text("Download as video")
-download_urls = ";".join(map(lambda x: x.get_attribute("href"), links))
-print(download_urls)
+names_elems = driver.find_elements_by_class_name('msgtxt')
+download_urls = map(lambda x: x.get_attribute("href"), links)
+names = map(lambda x: x.text, names_elems)
+for n, l in zip(names, download_urls):
+    print(n, l)
 driver.quit()
