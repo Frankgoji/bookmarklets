@@ -20,22 +20,6 @@ if [[ ! -d $name ]]; then
 fi
 cd $name
 
-#links=$(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
-#arr_links=(${links//;/ })
-#i=0
-#for l in "${arr_links[@]}"; do
-#    printf -v j "${name}_%02d.mp4" $i
-#    let "i += 1"
-#    try=0
-#    while [[ (! -e $j || ! -s $j) && $try -lt $tries ]]; do
-#        if [[ -e $j ]]; then
-#            rm $j
-#        fi
-#        wget --output-document=$j $l
-#        let "try += 1"
-#    done
-#done
-#for line in "$()"; do
 while read line; do
     name="$(echo $line | sed 's/^\(.*\) .*$/\1/').mp4"
     link=$(echo $line | sed 's/^.* \(.*\)$/\1/')
