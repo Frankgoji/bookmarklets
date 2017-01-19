@@ -8,7 +8,7 @@ function error {
 }
 
 if [[ $# != 2 ]]; then
-    error "There should be two arguments: the url and the groupname"
+    error "There should be two arguments: the url and the directory name"
 fi
 
 url=$1
