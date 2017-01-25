@@ -7,6 +7,20 @@ function error {
     exit 1
 }
 
+function file_exists {
+    if [[ $(ls | grep -F "$1") ]]; then
+        echo true
+    fi
+}
+
+function file_not_empty {
+    # Assumes file exists
+    file_name=$(ls "$1"*)
+    if [[ -s $file_name ]]; then
+        echo true
+    fi
+}
+
 if [[ $# != 2 ]]; then
     error "There should be two arguments: the url and the directory name"
 fi
@@ -21,14 +35,16 @@ fi
 cd $name
 
 while read line; do
-    name="$(echo $line | sed 's/^\(.*\) .*$/\1/').mp4"
+    name="$(echo $line | sed 's/^\(.*\) .*$/\1/')"
+    name="$(echo $name | sed 's/\//\|/g')"
     link=$(echo $line | sed 's/^.* \(.*\)$/\1/')
     try=0
-    while [[ (! -e $name || ! -s $name) && $try -lt $tries ]]; do
-        if [[ -e $name ]]; then
-            rm $name
+    while [[ (! $(file_exists "$name") || ! $(file_not_empty "$name")) && $try -lt $tries ]]; do
+        if [[ $(file_exists "$name") ]]; then
+            file_name=$(ls "$name"*)
+            rm "$file_name"
         fi
-        wget --output-document="$name" $link
+        wget --output-document="$name.mp4" $link
         let "try += 1"
     done
 done < <(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
