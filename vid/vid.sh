@@ -36,14 +36,16 @@ cd $name
 
 while read line; do
     name="$(echo $line | sed 's/^\(.*\) .*$/\1/')"
-    name="$(echo $name | sed 's/\//\|/g')"
     link=$(echo $line | sed 's/^.* \(.*\)$/\1/')
+    name="$(echo $name | sed 's/\//\|/g')"
     try=0
     while [[ (! $(file_exists "$name") || ! $(file_not_empty "$name")) && $try -lt $tries ]]; do
         if [[ $(file_exists "$name") ]]; then
             file_name=$(ls "$name"*)
+            echo "############# ALERT::: rm $file_name"
             rm "$file_name"
         fi
+        echo "############# DOWNLOAD::: $name.mp4 $link"
         wget --output-document="$name.mp4" $link
         let "try += 1"
     done
