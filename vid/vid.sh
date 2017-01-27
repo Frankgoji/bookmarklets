@@ -37,7 +37,7 @@ cd $name
 while read line; do
     name="$(echo $line | sed 's/^\(.*\) .*$/\1/')"
     link=$(echo $line | sed 's/^.* \(.*\)$/\1/')
-    name="$(echo $name | sed 's/\/\|:/-/g')"
+    name="$(echo $name | sed 's/[/:"*?|]/-/g')"
     try=0
     while [[ (! $(file_exists "$name") || ! $(file_not_empty "$name")) && $try -lt $tries ]]; do
         if [[ $(file_exists "$name") ]]; then
