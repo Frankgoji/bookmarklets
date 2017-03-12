@@ -9,3 +9,21 @@ javascript:(
         }
     }
 )();
+
+// To select all "Next Days" in Berkeley's broken advising appointment website
+javascript:(
+    function(){
+        var nextInterval = setInterval(nextIntervalFunc, 500);
+        function nextIntervalFunc() {
+            console.log("nexting");
+            anchors=document.getElementsByTagName("A");
+            for(i=0;i<anchors.length;i++){
+                if(anchors[i].innerHTML.search(/next/i) !== -1 && !anchors[i].getAttribute("disabled")){
+                    anchors[i].click();
+                    return;
+                }
+            }
+            clearInterval(nextInterval);
+        }
+    }
+)();
