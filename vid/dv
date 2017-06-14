@@ -18,7 +18,6 @@ function usage {
 }
 
 function queue {
-    cd ~/Desktop
     ~/Documents/personal_projects/bookmarklets/vid/vid.sh $queue queue
 }
 
@@ -29,10 +28,8 @@ if [[ $# > 4 || ($# == 1 && $1 == "-h") ]]; then
 elif [[ $# == 0 || ($# == 1 && $1 == "-q") ]]; then
     queue
 elif [[ $# == 3 && $1 == "-p" ]]; then
-    cd ~/Desktop
     ~/Documents/personal_projects/bookmarklets/vid/vid.sh $2 $3
 elif [[ $1 == "-lp" ]]; then
-    cd ~/Desktop
     args="$2 $3"
     if [[ $# == 4 ]]; then
         args="$args $4"

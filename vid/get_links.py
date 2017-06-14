@@ -9,7 +9,6 @@ if len(argv) != 2:
     raise ValueError("Needs only 1 arg: playlist url")
 
 pl_url = argv[1]
-print(pl_url)
 
 driver = webdriver.Firefox()
 driver.implicitly_wait(20)
