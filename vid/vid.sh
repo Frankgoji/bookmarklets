@@ -26,6 +26,7 @@ if [[ $# != 2 ]]; then
 fi
 
 url=$1
+echo $url
 name=$2
 tries=10
 
