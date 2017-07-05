@@ -21,6 +21,23 @@ function file_not_empty {
     fi
 }
 
+# Uses curl to get the download links and video names
+function get_names_links {
+    url=$1
+    curl -d "playlistok=ok&hd=2" --data-urlencode "playlist=$url" http://www.downvids.net/videoflv.php > req_response
+    cat req_response | grep "msgtxt en" | sed -r 's/^ *<span.*>(.*)<\/span>/\1/' > names
+    cat req_response | grep "Download as video" | sed -r 's/.*href="(.*)".*/\1/' > links
+    lines=$(cat names | wc -l | cut -d' ' -f 1)
+    for i in $(seq 1 $lines); do
+        name=$(sed "${i}q;d" names)
+        link=$(sed "${i}q;d" links)
+        echo $name $link
+    done
+    rm req_response
+    rm names
+    rm links
+}
+
 if [[ $# != 2 ]]; then
     error "There should be two arguments: the url and the directory name"
 fi
@@ -50,6 +67,4 @@ while read line; do
         wget --output-document="$name.mp4" $link
         let "try += 1"
     done
-done < <(python3 ~/Documents/personal_projects/bookmarklets/vid/get_links.py $url)
-
-rm geckodriver.log
+done < <(get_names_links "$url")
