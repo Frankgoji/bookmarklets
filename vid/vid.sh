@@ -38,6 +38,12 @@ function get_names_links {
     rm links
 }
 
+# TODO: Function to filter the names and links use vim to select the ones to
+# keep
+function filter {
+    # TODO
+}
+
 if [[ $# != 2 ]]; then
     error "There should be two arguments: the url and the directory name"
 fi
