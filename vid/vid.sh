@@ -8,15 +8,14 @@ function error {
 }
 
 function file_exists {
-    if [[ $(ls | grep -F "$1") ]]; then
+    if [[ -e "$1.mp3" || -e "$1.mp4" ]]; then
         echo true
     fi
 }
 
 function file_not_empty {
     # Assumes file exists
-    file_name=$(ls "$1"*)
-    if [[ -s $file_name ]]; then
+    if [[ -s "$1.mp3" || -s "$1.mp4" ]]; then
         echo true
     fi
 }
@@ -30,6 +29,9 @@ function get_names_links {
     lines=$(cat names | wc -l | cut -d' ' -f 1)
     for i in $(seq 1 $lines); do
         name=$(sed "${i}q;d" names)
+        if [[ $i -gt 1 && $(sed -n "1,$((i-1))p" names | grep -e "$name$") ]]; then
+            name+="1"
+        fi
         link=$(sed "${i}q;d" links)
         echo $name $link
     done
@@ -59,9 +61,9 @@ while read line; do
     try=0
     while [[ (! $(file_exists "$name") || ! $(file_not_empty "$name")) && $try -lt $tries ]]; do
         if [[ $(file_exists "$name") ]]; then
-            file_name=$(ls "$name"*)
+            file_name=$(ls -- "$name"*)
             echo "############# ALERT::: rm $file_name"
-            rm "$file_name"
+            rm -- "$file_name"
         fi
         echo "############# DOWNLOAD::: $name.mp4 $link"
         wget --output-document="$name.mp4" $link
