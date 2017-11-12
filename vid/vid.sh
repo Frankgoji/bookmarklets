@@ -26,6 +26,10 @@ function get_names_links {
     curl -d "playlistok=ok&hd=2" --data-urlencode "playlist=$url" http://www.downvids.net/videoflv.php > req_response
     cat req_response | grep "msgtxt en" | sed -r 's/^ *<span.*>(.*)<\/span>/\1/' > names
     cat req_response | grep "Download as video" | sed -r 's/.*href="(.*)".*/\1/' > links
+    if [[ $(cat names | wc -l) != $(cat links | wc -l) ]]; then
+        echo "Sanity check failed" 1>&2
+        exit 1
+    fi
     lines=$(cat names | wc -l | cut -d' ' -f 1)
     for i in $(seq 1 $lines); do
         name=$(sed "${i}q;d" names)

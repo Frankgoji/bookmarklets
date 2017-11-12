@@ -17,8 +17,9 @@ function usage {
     echo "      dv -m [magnet_file]     Saves the magnet urls into torrent files and launches rtorrent"
 }
 
+CURRDIR=$(dirname "$0")
 function queue {
-    ~/Documents/personal_projects/bookmarklets/vid/vid.sh $queue queue
+    $CURRDIR/vid.sh $queue queue
 }
 
 choice=0
@@ -28,17 +29,17 @@ if [[ $# > 4 || ($# == 1 && $1 == "-h") ]]; then
 elif [[ $# == 0 || ($# == 1 && $1 == "-q") ]]; then
     queue
 elif [[ $# == 3 && $1 == "-p" ]]; then
-    ~/Documents/personal_projects/bookmarklets/vid/vid.sh $2 $3
+    $CURRDIR/vid.sh $2 $3
 elif [[ $1 == "-lp" ]]; then
     args="$2 $3"
     if [[ $# == 4 ]]; then
         args="$args $4"
     fi
-    python3 ~/Documents/personal_projects/bookmarklets/vid/parallel_pl.py $args
+    python3 $CURRDIR/parallel_pl.py $args
 elif [[ $# == 4 && $1 == "-u" ]]; then
-    python3 ~/Documents/personal_projects/bookmarklets/vid/upload_vid.py $2 $3 $4
+    python3 $CURRDIR/upload_vid.py $2 $3 $4
 elif [[ $# == 2 && $1 == "-m" ]]; then
-    ~/Documents/personal_projects/bookmarklets/vid/magnet.sh $2
+    $CURRDIR/magnet.sh $2
 else
     usage
 fi
