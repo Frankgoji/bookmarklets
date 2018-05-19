@@ -12,7 +12,7 @@ if [[ $# != 1 ]]; then
 fi
 
 file=$1
-if [[ ! -a $file ]]; then
+if [[ ! -e $file ]]; then
     error "Not a valid file."
 fi
 
