@@ -21,6 +21,4 @@ cd ~/Downloads/.rt_watch
 while read line; do
     [[ "$line" =~ xt=urn:btih:([^&/]+) ]] || exit;
     echo "d10:magnet-uri${#line}:${line}e" > "meta-${BASH_REMATCH[1]}.torrent"
-done <$file
-
-rtorrent
+done <$file && rtorrent
