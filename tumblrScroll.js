@@ -1,45 +1,58 @@
 javascript:(function() {
     fetch('http://tumblr.com')
     .then(function() {
-        _scroll = function() {
+        var _scroll = function() {
             window.scrollTo(0, document.body.scrollHeight);
         };
-        _getBottomTime = function() {
-            _links = document.getElementsByClassName('post_permalink');
-            _bottomLink = _links[_links.length - 1].href;
-            return fetch(_bottomLink)
-                .then(data=>data.text())
-                .then(data=>Date.parse(data.match(/datePublished":"([^"]*)-05:00"/)[1] + "Z"))
+        var _getBottomTime = function() {
+            var _links = document.getElementsByClassName('post_permalink');
+            var _bottomLink = _links[_links.length - 1].href;
+            var _penUltBottomLink = _links[_links.length - 2].href;
+            _links = null;
+            return _getPostDate(_bottomLink)
+                .catch(() => _getPostDate(_penUltBottomLink))
                 .catch(err=>{alert("cors,https?"+err);throw err;});
         };
-        _fromTime = Date.parse(prompt("FromTime:"));
-        _toTime = Date.parse(prompt("ToTime:"));
-        _posts = [];
-        _toRemove = [];
-        _getToTime = function(reachedTime, origLen) {
-            if (document.getElementById('posts').childNodes.length - 2 === origLen) {
+        var _getPostDate = function(url) {
+            return fetch(url)
+                .then(data=>data.text())
+                .then(data=>Date.parse(data.match(/datePublished":"([^"]*)-05:00"/)[1] + "Z"));
+        };
+        var _fromTime = Date.parse(prompt("FromTime:"));
+        var _toTime = prompt("ToTime:");
+        if (_toTime === "now") {
+            _toTime = Date.parse(new Date());
+        }
+        var _posts = [];
+        var _getToTime = function(reachedTime, origLen) {
+            let parentNode = document.getElementById('posts');
+            if (parentNode.childNodes.length - 2 === origLen) {
                 setTimeout(() => _getToTime(reachedTime, origLen), 1000);
                 return;
             }
-            _toRemove.map(p => p.remove());
-            _toRemove.length = 0;
+            if (origLen) {
+                for (i = 0; i < origLen; i++) {
+                    parentNode.removeChild(parentNode.childNodes[2]);
+                }
+            }
             _getBottomTime().then(date => {
                 if (date > _fromTime) {
-                    _currPosts = [];
-                    Array.from(document.getElementById('posts').childNodes).map((p, i) => {
-                        if (i > 1) {
-                            _toRemove.push(p);
-                            _currPosts.push(p);
-                        }
-                    });
+                    var _lenCurrPosts = parentNode.childNodes.length - 2;
                     if (date < _toTime) {
-                        _posts.push(_currPosts);
+                        console.log('storing posts');
+                        let _storedPosts = [];
+                        for (i = 0; i < _lenCurrPosts; i++) {
+                            _storedPosts.push(parentNode.childNodes[i+2]);
+                        }
+                        _posts.push(_storedPosts);
                     }
                     _scroll();
-                    _getToTime(false, _currPosts.length);
+                    parentNode = null;
+                    console.log(_lenCurrPosts);
+                    _getToTime(false, _lenCurrPosts);
                 } else {
-                    _top = document.getElementById('new_post_buttons');
-                    _check = document.createElement('input');
+                    var _top = document.getElementById('new_post_buttons');
+                    var _check = document.createElement('input');
                     _check.setAttribute("type", "checkbox");
                     _check.id = "advance_check";
                     _top.parentNode.insertBefore(_check, _top.nextSibling);
@@ -47,12 +60,12 @@ javascript:(function() {
                 }
             });
         };
-        _advance = function() {
+        var _advance = function() {
             if (_posts.length === 0) {
                 document.getElementById("advance_check").remove();
                 return;
             }
-            _c = document.getElementById("advance_check");
+            var _c = document.getElementById("advance_check");
             if (!_c.checked) {
                 setTimeout(_advance, 500);
             } else {
@@ -62,8 +75,8 @@ javascript:(function() {
                         p.remove();
                     }
                 });
-                _top = document.getElementById('advance_check');
-                _toAdd = _posts.pop(_posts.length - 1);
+                var _top = document.getElementById('advance_check');
+                var _toAdd = _posts.pop(_posts.length - 1);
                 for (i=_toAdd.length-1; i >=0; i--) {
                     _top.parentNode.insertBefore(_toAdd[i], _top.nextSibling);
                 }
