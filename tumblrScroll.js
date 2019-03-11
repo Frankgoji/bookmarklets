@@ -16,7 +16,7 @@ javascript:(function() {
         var _getPostDate = function(url) {
             return fetch(url)
                 .then(data=>data.text())
-                .then(data=>Date.parse(data.match(/datePublished":"([^"]*)-05:00"/)[1] + "Z"));
+                .then(data=>Date.parse(data.match(/datePublished":"([^"]*)-0[0-9]:00"/)[1] + "Z"));
         };
         var _fromTime = Date.parse(prompt("FromTime:"));
         var _toTime = prompt("ToTime:");
