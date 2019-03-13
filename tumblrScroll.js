@@ -22,6 +22,8 @@ javascript:(function() {
         var _toTime = prompt("ToTime:");
         if (_toTime === "now") {
             _toTime = Date.parse(new Date());
+        } else {
+            _toTime = Date.parse(_toTime);
         }
         var _posts = [];
         var _getToTime = function(reachedTime, origLen) {
@@ -39,7 +41,6 @@ javascript:(function() {
                 if (date > _fromTime) {
                     var _lenCurrPosts = parentNode.childNodes.length - 2;
                     if (date < _toTime) {
-                        console.log('storing posts');
                         let _storedPosts = [];
                         for (i = 0; i < _lenCurrPosts; i++) {
                             _storedPosts.push(parentNode.childNodes[i+2]);
@@ -48,7 +49,6 @@ javascript:(function() {
                     }
                     _scroll();
                     parentNode = null;
-                    console.log(_lenCurrPosts);
                     _getToTime(false, _lenCurrPosts);
                 } else {
                     var _top = document.getElementById('new_post_buttons');
@@ -76,6 +76,8 @@ javascript:(function() {
                     }
                 });
                 var _top = document.getElementById('advance_check');
+                var _lineBreak = document.createElement('hr');
+                _top.parentNode.insertBefore(_lineBreak, _top.nextSibling);
                 var _toAdd = _posts.pop(_posts.length - 1);
                 for (i=_toAdd.length-1; i >=0; i--) {
                     _top.parentNode.insertBefore(_toAdd[i], _top.nextSibling);
