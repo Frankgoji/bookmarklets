@@ -1,0 +1,13 @@
+{
+    "name": "Tumblr Scroll Extension",
+    "version": "1.0",
+    "description": "Extension to scroll Tumblr all the way to a specified date.",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "popup.html"
+    }
+}
