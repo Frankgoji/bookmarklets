@@ -3,11 +3,24 @@
     "version": "1.0",
     "description": "Extension to scroll Tumblr all the way to a specified date.",
     "manifest_version": 2,
+    "permissions": ["activeTab", "declarativeContent", "*://*.tumblr.com/*"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
     "page_action": {
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/icon16.png",
+            "32": "images/icon32.png",
+            "48": "images/icon48.png",
+            "128": "images/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "images/icon16.png",
+        "32": "images/icon32.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
     }
 }

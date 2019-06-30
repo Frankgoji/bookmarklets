@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="popup.js"></script>
 </head>
 <body>
-    <div>Start Time: <input type="text" /></div>
-    <div>End Time: <input type="text" /></div>
-    <button>Start</button>
+    <div>Start Time: <input id="startTime" type="text" onchange="checkTimes()" /></div>
+    <div>End Time: <input id="endTime" type="text" onchange="checkTimes()" /></div>
+    <button id="start" onclick="startScroll()" disabled>Start</button>
 </body>
 </html>
