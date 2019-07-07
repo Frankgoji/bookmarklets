@@ -27,4 +27,5 @@ function startScroll() {
             file: 'tumblrScroll.js'
         });
     });
+    window.close();
 }
