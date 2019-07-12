@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="popup.js"></script>
-</head>
 <body>
-    <div>Start Time: <input id="startTime" type="text" onkeypress="checkTimes()" /></div>
-    <div>End Time: <input id="endTime" type="text" onkeypress="checkTimes()" /></div>
-    <button id="start" onclick="startScroll()" disabled>Start</button>
+    <form onsubmit="return startScroll()">
+        <div>Start Time: <input id="startTime" type="text" onkeypress="checkTimes()" /></div>
+        <div>End Time: <input id="endTime" type="text" onkeypress="checkTimes()" /></div>
+        <button id="start" disabled>Start</button>
+    </form>
+    <script src="popup.js"></script>
 </body>
 </html>

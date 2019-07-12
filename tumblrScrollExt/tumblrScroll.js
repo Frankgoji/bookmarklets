@@ -75,7 +75,18 @@ var _advance = function() {
         _advance();
     }
 };
+/**
+ * Set home button to scroll to top if still advancing.
+ */
+var _homeOnClick = function() {
+    if (_posts.length !== 0) {
+        window.scrollTo(0, 0);
+        return false;
+    }
+    return true;
+};
 chrome.runtime.sendMessage({contentScriptQuery: 'getTimes'}, times => {
     console.log(times);
+    document.getElementsByClassName('tab_anchor')[0].onclick = _homeOnClick;
     _getToTime(false, times.startTime, times.endTime);
 });
