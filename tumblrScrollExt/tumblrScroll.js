@@ -42,37 +42,36 @@ var _getToTime = function(reachedTime, _fromTime, _toTime, origLen) {
             _getToTime(false, _fromTime, _toTime, _lenCurrPosts);
         } else {
             var _top = document.getElementById('new_post_buttons');
-            var _check = document.createElement('input');
-            _check.setAttribute("type", "checkbox");
-            _check.id = "advance_check";
-            _top.parentNode.insertBefore(_check, _top.nextSibling);
-            _advance();
+            var _button = document.createElement('input');
+            _button.setAttribute("type", "button");
+            _button.style = "margin-bottom: 10px";
+            _button.value = "Advance";
+            _button.id = "advance_button";
+            _button.onclick = _advance;
+            _top.parentNode.insertBefore(_button, _top.nextSibling);
         }
     });
 };
 var _advance = function() {
     if (_posts.length === 0) {
-        document.getElementById("advance_check").remove();
+        document.getElementById("advance_button").remove();
         return;
     }
-    var _c = document.getElementById("advance_check");
-    if (!_c.checked) {
-        setTimeout(_advance, 500);
-    } else {
-        _c.checked = false;
-        Array.from(document.getElementById('posts').childNodes).map((p, i) => {
-            if (i > 1) {
-                p.remove();
-            }
-        });
-        var _top = document.getElementById('advance_check');
-        var _lineBreak = document.createElement('hr');
-        _top.parentNode.insertBefore(_lineBreak, _top.nextSibling);
-        var _toAdd = _posts.pop(_posts.length - 1);
-        for (i=_toAdd.length-1; i >=0; i--) {
-            _top.parentNode.insertBefore(_toAdd[i], _top.nextSibling);
+    var _b = document.getElementById("advance_button");
+    Array.from(document.getElementById('posts').childNodes).map((p, i) => {
+        if (i > 1) {
+            p.remove();
         }
-        _advance();
+    });
+    var _top = document.getElementById('advance_button');
+    var _lineBreak = document.createElement('hr');
+    _top.parentNode.insertBefore(_lineBreak, _top.nextSibling);
+    var _toAdd = _posts.pop(_posts.length - 1);
+    for (i=_toAdd.length-1; i >=0; i--) {
+        _top.parentNode.insertBefore(_toAdd[i], _top.nextSibling);
+    }
+    if (_posts.length === 0) {
+        document.getElementById("advance_button").remove();
     }
 };
 /**
