@@ -18,8 +18,9 @@ var _getPostDate = function(url) {
 var _posts = [];
 var _getToTime = function(reachedTime, _fromTime, _toTime, origLen) {
     let parentNode = document.getElementById('posts');
-    if (parentNode.childNodes.length - 2 === origLen) {
-        setTimeout(() => _getToTime(reachedTime, _fromTime, _toTime, origLen), 1000);
+    if (parentNode.childNodes.length - 2 <= origLen) {
+        let nextOrigLen = parentNode.childNodes.length - 2;
+        setTimeout(() => _getToTime(reachedTime, _fromTime, _toTime, nextOrigLen), 1000);
         return;
     }
     if (origLen) {
