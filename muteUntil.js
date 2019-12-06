@@ -9,7 +9,7 @@ javascript: (function() {
         }
         let currSong = document.getElementsByClassName('Marquee__wrapper__content')[0];
         currSong = (currSong) ? currSong : document.getElementsByClassName('Marquee__wrapper__content__child')[0];
-        return (currSong) ? currSong.innerText : 'ADPLAYED';
+        return (currSong && currSong.innerText && currSong.innerText !== 'Your station will be right back.') ? currSong.innerText : 'ADPLAYED';
     };
     console.log('first click mute');
     clickMuteButton();
@@ -21,7 +21,7 @@ javascript: (function() {
         console.log(_checkSongTitle);
         if (_currSongTitle !== _checkSongTitle) {
             console.log('should click mute');
-            clickMuteButton();
+            setTimeout(clickMuteButton, 500);
             clearInterval(_intervalId);
         }
     }, 1000);
