@@ -1,3 +1,3 @@
 (function() {
-    document.querySelector('div.player-video video').requestPictureInPicture();
+    document.getElementsByTagName('video')[0].requestPictureInPicture();
 })()
