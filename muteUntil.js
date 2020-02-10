@@ -21,7 +21,7 @@ javascript: (function() {
         console.log(_checkSongTitle);
         if (_currSongTitle !== _checkSongTitle) {
             console.log('should click mute');
-            setTimeout(clickMuteButton, 500);
+            setTimeout(clickMuteButton, 1000);
             clearInterval(_intervalId);
         }
     }, 1000);
