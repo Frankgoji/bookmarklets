@@ -28,6 +28,9 @@ javascript: (
         const normalDuration = v.duration;
         setInterval(() => {
             const v = document.querySelector('video');
+            if (document.getElementsByClassName('ytp-ad-skip-button')[0]) {
+                document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+            }
             if (v.duration < normalDuration) {
                 try {
                     document.getElementsByClassName('ytp-ad-skip-button')[0].click();
