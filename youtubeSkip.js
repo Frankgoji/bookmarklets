@@ -2,11 +2,11 @@
 javascript: (
     () => {
         try {
-            document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
         } catch {
             const v = document.querySelector('video');
             v.currentTime = v.duration;
-            document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
         }
     }
 )()
@@ -15,12 +15,12 @@ javascript: (
 javascript: (
     async () => {
         try {
-            document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
         } catch {
             const v = document.querySelector('video');
             if (v.duration < 60) {
                 v.currentTime = v.duration;
-                document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+                document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
             }
         }
         await new Promise(r => setTimeout(r, 1000));
@@ -28,16 +28,16 @@ javascript: (
         const normalDuration = v.duration;
         setInterval(() => {
             const v = document.querySelector('video');
-            if (document.getElementsByClassName('ytp-ad-skip-button')[0]) {
-                document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+            if (document.getElementsByClassName('ytp-ad-skip-button-modern')[0]) {
+                document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
             }
             if (v.duration < normalDuration) {
                 try {
-                    document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
                 } catch {
                     const v = document.querySelector('video');
                     v.currentTime = v.duration;
-                    document.getElementsByClassName('ytp-ad-skip-button')[0].click();
+                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
                 }
             }
         }, 200);
