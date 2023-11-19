@@ -25,9 +25,14 @@ javascript: (
         }
         await new Promise(r => setTimeout(r, 1000));
         const v = document.querySelector('video');
-        const normalDuration = v.duration;
+        var currVid = window.location.href;
+        var normalDuration = v.duration;
         setInterval(() => {
             const v = document.querySelector('video');
+            if (window.location.href !== currVid) {
+                currVid = window.location.href;
+                normalDuration = v.duration;
+            }
             if (document.getElementsByClassName('ytp-ad-skip-button-modern')[0]) {
                 document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
             }
