@@ -14,15 +14,18 @@ javascript: (
 // Copy below for something that will skip for basically the whole video
 javascript: (
     async () => {
-        try {
-            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-        } catch {
-            const v = document.querySelector('video');
-            if (v.duration < 60) {
-                v.currentTime = v.duration;
+        const skip = () => {
+            try {
                 document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
+            } catch {
+                const v = document.querySelector('video');
+                if (v.duration < 60) {
+                    v.currentTime = v.duration;
+                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
+                }
             }
-        }
+        };
+        skip(); skip();
         await new Promise(r => setTimeout(r, 1000));
         const v = document.querySelector('video');
         var currVid = window.location.href;
@@ -37,13 +40,7 @@ javascript: (
                 document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
             }
             if (v.duration < normalDuration) {
-                try {
-                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-                } catch {
-                    const v = document.querySelector('video');
-                    v.currentTime = v.duration;
-                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-                }
+                skip();
             }
         }, 200);
     }
