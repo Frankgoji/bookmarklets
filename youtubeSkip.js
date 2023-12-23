@@ -14,7 +14,10 @@ javascript: (
 // Copy below for something that will skip for basically the whole video
 javascript: (
     async () => {
-        const skip = () => {
+        const skip = async () => {
+            if (!document.querySelector('.ytp-ad-text')) {
+                return;
+            }
             try {
                 document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
             } catch {
@@ -24,8 +27,9 @@ javascript: (
                     document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
                 }
             }
+            await new Promise(r => setTimeout(r, 1000));
         };
-        skip(); skip();
+        await skip(); await skip();
         await new Promise(r => setTimeout(r, 1000));
         const v = document.querySelector('video');
         var currVid = window.location.href;
