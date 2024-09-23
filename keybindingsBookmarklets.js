@@ -8,7 +8,7 @@ javascript: (
             document.querySelector('#contents ytd-playlist-video-renderer button').click();
             await new Promise(r => setTimeout(r, 1000));
             document.querySelectorAll('tp-yt-paper-listbox ytd-menu-service-item-renderer')[2].click();
-        }
+        };
         document.onkeydown = rmTop;
     }
 )()
@@ -25,7 +25,7 @@ javascript: (
             document.querySelectorAll('div[role = "group"] li')[1].click();
             await new Promise(r => setTimeout(r, 250));
             document.querySelector('button[aria-label = "Open post state options"]').parentNode.parentNode.parentNode.querySelector('button').click();
-        }
+        };
         document.onkeydown = addToQueue;
     }
 )()
