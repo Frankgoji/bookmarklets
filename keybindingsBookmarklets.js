@@ -13,11 +13,11 @@ javascript: (
     }
 )()
 
-// Copy below for adding a keybinding to ' to auto-click Add to Queue
+// Copy below for adding a keybinding to ~ to auto-click Add to Queue
 javascript: (
     () => {
         const addToQueue = async (e) => {
-            if (e.key !== "'") {
+            if (e.key !== "~") {
                 return
             }
             document.querySelector('button[aria-label = "Open post state options"]').click();
