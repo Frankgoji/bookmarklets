@@ -4,16 +4,12 @@ javascript: (
         const getVid = () => {
             return document.getElementById('movie_player').querySelector('video');
         };
-        if (!document.querySelector('.ytp-ad-text')) {
+        if (document.querySelector('.video-ads').childNodes.length === 0) {
             return;
         }
-        try {
-            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-        } catch {
-            const v = getVid();
-            v.currentTime = v.duration;
-            document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-        }
+        const v = getVid();
+        v.currentTime = v.duration;
+        document.getElementsByClassName('ytp-skip-ad-button')[0].click();
     }
 )()
 
@@ -24,17 +20,13 @@ javascript: (
             return document.getElementById('movie_player').querySelector('video');
         };
         const skip = async () => {
-            if (!document.querySelector('.ytp-ad-text')) {
+            if (document.querySelector('.video-ads').childNodes.length === 0) {
                 return;
             }
-            try {
-                document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-            } catch {
-                const v = getVid();
-                if (v.duration < 60) {
-                    v.currentTime = v.duration;
-                    document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
-                }
+            const v = getVid();
+            if (v.duration < 60) {
+                v.currentTime = v.duration;
+                document.getElementsByClassName('ytp-skip-ad-button')[0].click();
             }
             await new Promise(r => setTimeout(r, 1000));
         };
@@ -49,8 +41,8 @@ javascript: (
                 currVid = window.location.href;
                 normalDuration = v.duration;
             }
-            if (document.getElementsByClassName('ytp-ad-skip-button-modern')[0]) {
-                document.getElementsByClassName('ytp-ad-skip-button-modern')[0].click();
+            if (document.getElementsByClassName('ytp-skip-ad-button')[0]) {
+                document.getElementsByClassName('ytp-skip-ad-button')[0].click();
             }
             if (v.duration < normalDuration) {
                 skip();
