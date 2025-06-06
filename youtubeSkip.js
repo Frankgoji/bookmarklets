@@ -1,4 +1,6 @@
 // Copy below for basically a youtube skip button
+// BTW now I know that the skip button issue is caused by BISCOTTI_BASED_DETECTION_STATE_IS_CLICK_EVENT_TRUSTED.
+// It would require an extension, not just a bookmarklet, to get past the isTrusted check.
 javascript: (
     () => {
         const getVid = () => {
@@ -9,7 +11,6 @@ javascript: (
         }
         const v = getVid();
         v.currentTime = v.duration;
-        document.getElementsByClassName('ytp-skip-ad-button')[0].click();
     }
 )()
 
@@ -20,13 +21,16 @@ javascript: (
             return document.getElementById('movie_player').querySelector('video');
         };
         const skip = async () => {
-            if (document.querySelector('.video-ads').childNodes.length === 0) {
-                return;
+            try {
+                if (document.querySelector('.video-ads').childNodes.length === 0) {
+                    return;
+                }
+                const v = getVid();
+                v.currentTime = v.duration;
+                await new Promise(r => setTimeout(r, 1000));
+            } catch (e) {
+                /* Do Nothing */
             }
-            const v = getVid();
-            v.currentTime = v.duration;
-            document.getElementsByClassName('ytp-skip-ad-button')[0].click();
-            await new Promise(r => setTimeout(r, 1000));
         };
         await skip(); await skip();
         await new Promise(r => setTimeout(r, 1000));
